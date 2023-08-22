@@ -1,40 +1,45 @@
+'use client';
+
 import { error } from 'console';
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
-async function getData() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
-    // next кешує отримані дані, тому повторно запит не відбудеться
-    next: {
-      revalidate: 60, //  буде робити запит повторно через 60 сек
-    },
-  });
+import { getAllPosts } from '../../services/getPosts';
+import Posts from '../../components/Posts';
 
-  if (!res.ok) {
-    throw new Error('Something is wrong(');
-  }
-  return res.json();
-}
+// async function getData() {
+//   const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+//                                                          // next кешує отримані дані, тому повторно запит не відбудеться
+//     next: {
+//       revalidate: 60,                                     //  буде робити запит повторно через 60 сек
+//     },
+//   });
+
+//   if (!res.ok) {
+//     throw new Error('Something is wrong(');
+//   }
+//   return res.json();
+// }
 
 export const metadata: Metadata = {
   title: 'Blog',
 };
 
-export default async function Blog() {
-  const posts = await getData();
+export default function Blog() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllPosts()
+      .then(setPosts)
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <>
       <h1>Blog page</h1>
 
-      <ul>
-        {posts.map((post: any) => {
-          return (
-            <li key={post.id}>
-              <Link href={`/blog/${post.id}`}>{post.title}</Link>
-            </li>
-          );
-        })}
-      </ul>
+      {loading ? <h3>Loading...</h3> : <Posts posts={posts}></Posts>}
     </>
   );
 }

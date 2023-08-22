@@ -73,3 +73,7 @@ nav a:hover {
   background-color: #007bff; /* Колір при наведенні */
   color: #fff; /* Колір тексту при наведенні */
 }
+
+.active {
+  color: white;
+}

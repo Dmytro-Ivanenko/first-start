@@ -1,12 +1,16 @@
-import Link from 'next/link';
+import { Navigation } from './Navigation';
+
+const linkItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
+];
 
 export default function Header() {
   return (
     <header>
       <nav>
-        <Link href="/">Home</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/about">About</Link>
+        <Navigation navLinks={linkItems}></Navigation>
       </nav>
     </header>
   );
