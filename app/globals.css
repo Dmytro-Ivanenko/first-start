@@ -60,7 +60,8 @@ nav {
   align-items: center;
 }
 
-nav a {
+nav a,
+button {
   color: #007bff; /* Колір посилань */
   text-decoration: none;
   margin: 0 1rem;
@@ -69,11 +70,30 @@ nav a {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-nav a:hover {
+a {
+  color: white;
+}
+
+nav a:hover,
+button:hover {
   background-color: #007bff; /* Колір при наведенні */
   color: #fff; /* Колір тексту при наведенні */
 }
 
 .active {
   color: white;
+}
+
+form {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+input {
+  height: 40px;
+  width: 400px;
+  margin-right: 20px;
+}
+
+form button {
 }

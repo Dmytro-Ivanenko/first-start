@@ -1,11 +1,9 @@
 'use client';
 
-import { error } from 'console';
 import type { Metadata } from 'next';
-import { useState, useEffect } from 'react';
 
-import { getAllPosts } from '../../services/getPosts';
 import Posts from '../../components/Posts';
+import PostSearch from '@/components/PostSearch';
 
 // async function getData() {
 //   const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -26,20 +24,12 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getAllPosts()
-      .then(setPosts)
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
     <>
       <h1>Blog page</h1>
+      <PostSearch></PostSearch>
 
-      {loading ? <h3>Loading...</h3> : <Posts posts={posts}></Posts>}
+      {<Posts />}
     </>
   );
 }
